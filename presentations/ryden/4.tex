@@ -1,0 +1,106 @@
+\section{Cosmic Dynamics}
+
+\begin{frame}{Cosmic Dynamic}{Einstien's Field Equation}
+	$$ G_{\mu \nu} = \frac{8\pi G}{c^4} T_{\mu \nu} $$
+	The $G$ term is called Einstein's metric tensor (describes the curvature
+	of universe at all x,y,z,t) and the T term is called
+	the stress-energy metric tensor.
+\end{frame}
+
+\begin{frame}{Cosmic Dynamic}{Friedmann's equation}
+	An equation that links the Expansion of universe, Curvature and the
+	Mass-energy was required including terms $a(t), R_0, \kappa,
+	\epsilon(t)$.
+
+
+	$$ \left( \frac{\dot a}{a} \right)^2 = \frac{8\pi G}{3c^2}\epsilon(t) -
+	\frac{\kappa c^2}{R_0^2} \frac{1}{a(t)^2}$$
+
+	Friedmann proved this for General theory of relativity, but we will
+	prove it using the Newtonian Way.
+
+	To get to this, start with this take, a sphere that is contracting
+	because of its own action of gravity. Acceleration can be given as
+	$$ \frac{d^2R_s(t)}{dt^2} = - \frac{GM_s}{R(t)^2} $$
+
+
+\end{frame}
+
+\begin{frame}{Cosmic Dynamic}{Critical Density}
+	We can calculate the energy density using above relation for a good
+	estimate case senario where $\kappa = 0$, and $H(t) = \frac{\dot a}{a}$
+	is the hubble parameter. We get
+
+	$$ \epsilon_c(t) = \frac{3c^2}{8\pi G} H(t)^2  $$
+	For the current time, we can substituite the Hubble's constant and get
+	$\epsilon_{c,0} = 4870 MeV/m^3$ which also gives us mass density if you
+	divide by $c^2$.
+
+	We define Density parameter to be that of ratio with the critical
+	density for any universe as:
+	$$ \Omega (t)  = \frac{\epsilon(t)}{\epsilon_c(t)} = 1 + \frac{\kappa
+	c^2}{R_0^2 a(t)^2 H(t)^2} $$
+
+	Using we get the relation to finally get rid of $\kappa$:
+	$$ \frac{\kappa}{R_0^2} = \frac{H_0^2}{c^2} (\Omega_0 - 1) $$
+\end{frame}
+
+
+\begin{frame}{Cosmic Dynamic}{Fluid Equation and Acceleration Equation}
+	We know that Friedmann equation in the end of the day comes from energy
+	conservation, so we can use the first law of  thermodynamics to get a
+	similar equation.
+
+	We start with
+	$$ \dot E + P \dot V = 0 $$
+	and finally get:
+	$$ \dot \epsilon + 3 \frac{\dot a}{a} (\epsilon + P) = 0 $$
+
+	We can use this in the friedmann equation to get the acceleration
+	equation.
+	$$ \frac{\ddot a}{a} = \frac{4\pi G}{3c^2}\left( \epsilon + 3P \right) $$
+\end{frame}
+
+\begin{frame}{Cosmic Dynamic}{Equations of State}
+	We need another set of equations to solve the friedmann equation:
+	This equation called called equation of state is a relation between the
+	pressure used in fluid equation and energy density
+	$$ P = w \epsilon  $$
+
+	This w can vary with the substance used. For $w = 0$ for matter (can be
+	solved by using ideal gas equation) and for radiation the $w = 1/3$
+	comes from statistical mechanics and boson nature.
+\end{frame}
+
+
+\begin{frame}{Cosmic Dynamic}{Cosmological constant}
+
+	Einstein first introduced this to explain the static nature of universe
+	but cosmologists now use it because the default calculation of hubble's
+	constant are very underestimated. When added to the friedmann equation,
+	the cosmological constant looks like
+	$$ \left( \frac{\dot a}{a} \right)^2 = \frac{8\pi G}{3c^2}\epsilon(t) -
+	\frac{\kappa c^2}{R_0^2} \frac{1}{a(t)^2} + \frac{\Lambda}{3}$$
+
+	Its as if cosmological constant had its own energy density which doesn't
+	very with time or expansion.
+	$$ \left( \frac{\dot a}{a} \right)^2 = \frac{8\pi G}{3c^2}(\epsilon(t) +
+	\epsilon_\Lambda )-
+	\frac{\kappa c^2}{R_0^2} \frac{1}{a(t)^2}$$
+
+	If we were to call, $\epsilon_k = \epsilon + \epsilon_\Lambda$, that
+	would mean to keep the fluid equation constant we need. $w = -1$, which
+	means there is an attrative force.
+
+
+
+\end{frame}
+
+\begin{frame}
+
+	This is same as what Einstein did to add $\Lambda$ to the Newton's
+	equation. (acceleration equation, when einstein's universe is static)
+	$$ 0 = - \frac{4\pi G}{3} + \frac{\Lambda}{3} $$
+	When we solve for friedmann equation too (with static universe) we get.
+	$$ R_0 = \frac{c}{\Lambda^{1/2}} $$
+\end{frame}

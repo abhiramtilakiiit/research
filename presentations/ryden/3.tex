@@ -1,0 +1,169 @@
+\section{Newton Vs. Einstein}
+
+\begin{frame}{Newton Vs. Einstein}{Newton's Laws}
+	According to newton's laws we know that
+	$$ F = m_i a $$
+	where $m_i$ is inertial mass.
+
+	Newton also proposed the Gravitational Law:
+	$$ F =- \frac{GM_g m_g}{r^2} $$
+
+	Equivalence law states that the property that determines, how strongly
+	an object is pulled by gravity, also tells us how it accelerates by ANY
+	force. Proof is simple observations made by Galileo on objects on earth.
+
+	Using Guass's law and other vector algebra we can define a quantity that
+	measures how much Gravity acts on a given point in space using
+	\textbf{Poisson's Law}:
+	$$ \nabla^2 \Phi = 4\pi G \rho $$
+\end{frame}
+
+\begin{frame}
+	This quantity is called the Gravitational potential $\Phi$, and is
+	divergence of the acceleration due to gravity of a test mass,
+	$$ \vec a = - \vec \nabla \cdot \vec \Phi $$
+
+	This Poission's equation basically relates Gravity with mass density.
+\end{frame}
+
+
+\begin{frame}{Newton Vs. Einstein}{Special Theory of Relativity}
+	Postulates:
+	\begin{itemize}[<+->]
+		\item In all intertial frames (where laws of physics are valid),
+			the basic laws of physics are same.
+		\item If above is true, then for all the frames Maxwell's laws
+			are true and we calculate the speed of light to be c.
+        \end{itemize}
+
+	This means say in two different frames, the displacement of light in both
+	of these frames must be equal.
+	$$ c^2t^2 = x^2 + y^2 + z^2 $$
+	$$ c^2t'^2 = x'^2 + y'^2 + z'^2 $$
+
+	Thus we have to use the lorentz tranformation instead:
+	$$ x' = \gamma(x - vt), t' = \gamma(t - vx/c^2), y'=y, z'=z $$
+	Where $\gamma = (1 - v^2/c^2)^{-1/2}$
+
+\end{frame}
+
+\begin{frame}
+	So here, we need to find a quantity that is constant accross these
+	intertial frames. This quantity is called spacetime (minkowski metric)
+
+	$$ ds^2 = ct^2 - dx^2 - dy^2 - dz^2 $$
+	or simply
+	$$ ds^2 = ct^2 - dl^2 $$
+
+	Light is said to travel a null geodesic path, which is in accordance
+	with the fermat's principle that, light always takes the path with
+	shortest time (now spacetime). Thus $ds^2 = 0$
+\end{frame}
+
+
+\begin{frame}{Newton Vs. Einstein}{General Theory of Relativity}
+	The above calculations are considering that there is no curvature in
+	space and there is no gravity acting.
+
+	Einstein used the
+	Equivalence principle to explain that light must bend due to gravity
+	even though it has no mass.
+
+	Thus Einstein concludes that it is not mass that makes things bend but
+	the Energy. Mass and energy for non-relativistic objects are
+	interconvertible using the $E = mc^2$, and Energy is interconvertible
+	with momentum for relativistic objects as $E = pc$
+\end{frame}
+
+
+\begin{frame}{Newton Vs. Einstein}{Defining Curvature}
+	There are two types of uniform curvatures, postive and negetive (taking
+	2-D for example):
+	\begin{itemize}
+		\item  Uniform Positive Curvature:
+			$$ \alpha + \beta + \gamma = \pi + A/R_0^2  $$
+			When we measure a distance $dl$ along this curved
+			surface, then interms of spherical coordinates it can be
+			written as:
+			$$ dl^2 = dr^2 + R^2 sin^2(r/R)d\theta^2 $$
+		\item  Uniform Negetive Curvature:
+			$$ \alpha + \beta + \gamma = \pi - A/R_0^2  $$
+			When we measure in spherical coordinates, the value
+			comes out to be
+			$$ dl^2 = dr^2 + R^2 sinh^2(r/R)d\theta^2 $$
+
+        \end{itemize}
+\end{frame}
+
+\begin{frame}{Newton Vs. Einstein}{Defining Curvature}
+	When we try to scale this to 3-D we get:
+
+	Flat:
+	Uniform positive curvature gives:
+	$$ dl^2 = dr^2 + r  [d\theta^2 + sin^2 \theta d\phi^2]$$
+	Uniform positive curvature gives:
+	$$ dl^2 = dr^2 + R^2 sin^2(r/R)  [d\theta^2 + sin^2 \theta d\phi^2]$$
+	Negetive positive curvature gives:
+	$$ dl^2 = dr^2 + R^2 sinh^2(r/R)  [d\theta^2 + sin^2 \theta d\phi^2]$$
+
+	We can generalize this by substituiting variables like $S_k(r)$ and
+	$d\Omega$. Where
+	$$ d\Omega = d\theta^2 + sin^2\theta d\phi^2 $$
+\end{frame}
+
+\begin{frame}
+	$$ S_k(r) = \begin{cases}
+		Rsin(r/R) & (\kappa = 1) \\
+		r & (\kappa = 0) \\
+		Rsinh(r/R) & (\kappa = -1) \\
+	\end{cases}$$
+	Which makes the distance equation as:
+	$$ dl^2 = dr^2 + S_k(r)^2 d\Omega^2 $$
+
+\end{frame}
+
+\begin{frame}{Newton Vs. Einstein}{Robertson-Walked Metric}
+	This metric is a curved generalization to the Minkowski metric given by
+	$$ ds^2 = -c^2 dt^2 + a(t)^2 [ dr^2 + S_k(r)^2 d\Omega^2 ] $$
+
+	This is important because it takes into account that, the expansion
+	coefficient determines how the universe moves.
+\end{frame}
+
+
+\begin{frame}{Newton Vs. Einstein}{Proper Distance}
+	When we measure distance in a curved / expanding universe we don't take
+	into account the error which is caused because of the expansion
+	coefficient. Proper distance does.
+	$$ ds^2  = a(t)^2 [dr^2 + S_\kappa (r)^2 d\Omega^2] $$
+	Taking angular component to be zero if we observe object directly.
+	$$ ds = a(t)dr $$
+	$$ d_p(t) = a(t)r $$
+
+	If you observe this proves hubble's law:
+	$$ v_p(t_0) = H_0 d_p(t_0) $$
+\end{frame}
+
+\begin{frame}{Newton Vs. Einstein}{Expansion and red Shift}
+
+	We can use the fact that photons follow geodesic. In the
+	robertson-walker equation we have:
+	$$ 0 = -cdt^2 + a(t)^2 (dr)^2 $$
+	$$ a(t).dr = c.dt $$
+	$$ \int^{t_o}_{t_e}\frac{dt}{a(t)} = \int^{r}_{0} dr = r $$
+	Integrating between time of observation and emission.
+
+	If we were to calculate for the next crest of the wave we will still get
+	r.
+	Thus by subtracting we get.
+	$$ \int_{t_e}^{t_o} \frac{dt}{a(t)} = \int_{t_e + \lambda_e / c}^{ t_o + \lambda_o / c } \frac{dt}{a(t)} $$
+	$$ \int^{t_e + \lambda_e / c}_{t_e} \frac{dt}{a(t)} = \int^{ t_o +
+	\lambda_o / c }_{t_o} \frac{dt}{a(t)} $$
+\end{frame}
+
+\begin{frame}
+	Using the fact that expansion of universe barely happens when the crest
+	propogates we use:
+	$$ \frac{\lambda_e}{a(t_e)} =  \frac{\lambda_o}{a(t_o)}$$
+	$$ 1 + z =  \frac{1}{a(t_e)} $$
+\end{frame}

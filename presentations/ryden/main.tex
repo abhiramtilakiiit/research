@@ -1,0 +1,89 @@
+\documentclass[10pt]{beamer}
+\usetheme{Antibes}
+
+\tolerance 99999
+\hbadness 99999
+
+\usepackage{amsmath,amsthm,amssymb,color,latexsym}
+\usepackage{cancel}
+\usepackage{graphicx}
+\setbeamertemplate{items}[ball]
+
+
+\newenvironment{points}{\vspace{0.3cm} \begin{enumerate}[label={(\alph*)}]}{\end{enumerate} \vspace{0.2cm}}
+
+\title[Introduction to Cosmology - Ryden] %optional
+{Presentation for \textbf{Introduction to Cosmology} \\ \textit{- Barbara Ryden}}
+
+\author[Abhiram Tilak] % (optional, for multiple authors)
+{\textbf{Abhiram Tilak}}
+
+\institute[IIITH] % (optional)
+{
+	\textit{	\tiny{CND Dual Degree}} \\
+	\textit{IIIT Hyderabad}
+}
+
+
+\date[16th July 2024] % (optional)
+{16th July 2024}
+
+
+\AtBeginSection[]{
+  \begin{frame}
+  \vfill
+  \centering
+  \begin{beamercolorbox}[sep=8pt,center,shadow=false,rounded=true]{title}
+    \usebeamerfont{title}\huge \insertsectionhead\par%
+  \end{beamercolorbox}
+  \vfill
+  \end{frame}
+}
+
+\begin{document}
+
+\begin{frame}
+	\titlepage
+\end{frame}
+
+\begin{frame}
+\frametitle{Table of Contents}
+\tableofcontents
+    \end{frame}
+
+
+\include{1}
+\include{2}
+\include{3}
+\include{4}
+\include{5}
+\include{6}
+
+% Ending page
+\section*{Was it Fun?}
+\begin{frame}{Was it Fun?}
+
+Yes, ryden has a very creative of explaining things, and gives enough time to appreciate
+historical aspects too, and always includes metaphors and poems.
+
+\begin{columns}[c]
+    \column{.5\textwidth}
+        \begin{center}
+            \includegraphics[width=\textwidth]{teddy}
+        \end{center}
+    \column{.5\textwidth}
+        \begin{center}
+             \includegraphics[width=\textwidth]{destiny}
+        \end{center}
+\end{columns}
+
+\end{frame}
+
+\begin{frame}
+  \begin{beamercolorbox}[sep=8pt,center,shadow=false,rounded=true]{title}
+  \centering \Huge
+  Thank You
+  \end{beamercolorbox}
+\end{frame}
+
+\end{document}

@@ -1,0 +1,430 @@
+\documentclass[11pt]{article}
+
+\usepackage{graphicx}
+\usepackage{amsmath,amsthm,amssymb,color,latexsym}
+\usepackage{enumitem,cancel}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,
+    urlcolor=cyan,
+    pdftitle={Biomolecular Structures},
+    pdfpagemode=FullScreen,
+    }
+
+\tolerance 99999
+\hbadness 99999
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.99,0.99,0.97}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2
+}
+
+\lstset{style=mystyle}
+
+
+% Margins
+\topmargin=-0.45in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\newenvironment{points}{\vspace{0.3cm} \begin{enumerate}[label={(\alph*)}]}{\end{enumerate} \vspace{0.2cm}}
+\newenvironment{solution}{\subsection*{Solution:}}{\vspace{0.5cm} \hrule \vspace{0.7cm}}
+\newtheorem{problem}{Problem}
+
+
+\title{ Summer Project 2024 \\ Report }
+\author{ Abhiram Tilak - 2022113011 }
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\section{Summary}
+
+The initial description of my summer project was to read given chapters of two
+books, \texttt{Introduction to Cosmology - Barbara Ryden } and the
+\texttt{Introductionn to Elementary Particles - David Griffiths}. But when
+reading certain chapters of Ryden, I noticed that I don't really have the
+mathematical background for understanding certain topics like tensors, curvature and
+special theory of relativity. So following my advisor's recommendation, I
+had to read certain chapters of
+\texttt{Mathematical Methods for Physicists - George B. Arfken}, and also some
+parts of \texttt{Introduction to Electrodynamics - Griffiths} to make it easier
+for me to understand concepts. After doing so
+I have completed the required chapters in cosmology, but for the second book
+in the reading project, I have only covered two chapters. Thus in this report
+I am going to include both Cosmology and related Mathematics that I have
+learned.
+
+\section{Problems}
+
+As instructed by my advisor, I have to pick a few problems and solve them
+as a part of my report. I have picked these problems from a combination of books
+as referenced.
+
+\begin{enumerate}
+	\item 1.1 (dodelson)
+	\item 1.4
+	\item 2.5
+	\item 2.8
+	\item 2.4 (ryden)
+	\item 4.5
+	\item 4.1.2 (arfken)
+\end{enumerate}
+
+\begin{problem}
+	Suppose that $H$ scales as temperature squared all the way back until
+	the time when the temperature of the universe was $10^{19} GeV/k_B$
+	(universe was dominated by radiation all the way upto planktime). Also
+	suppose that dark energy is in the form of a cosmological constant
+	$\Lambda$, such that $\rho_\Lambda$ remains constant throughout the
+	history of the universe. What was $\rho_\Lambda/(3H^2/8\pi G)$, back
+	then? (Source: \texttt{Exercise 1.1: Modern Cosmology - Scott Dodelson} )
+\end{problem}
+
+\begin{solution}
+	Given $H$ scales as temperature squared:
+	$$ H(t) \propto T^2 $$
+	$$ \frac{H(t)}{H_0} \propto \left(\frac{T}{T_0}\right)^2 $$
+	Given $T = 10^{19} GeV/k_B$, converting into kelvin:
+	$$ T = 10^{19} GeV/k_B = 10^{19} \times \frac{1.6 \times 10^{-10}}{1.38
+	\times 10^{-23}} K = 1.159 \times 10^{32} K$$
+	Using $T_0 = 2.7 K$ (CMB radiation), we have
+	$$ \left(\frac{T}{T_0}\right) = \frac{1.159 \times 10^{32} }{2.7} = 4.29
+	\times 10^{31}$$
+
+	Thus the value, $\rho_\Lambda/(3H^2/8\pi G) $ can be given as:
+	$$ \frac{\rho_\Lambda}{\left(\frac{3H^2}{8\pi G}\right)} =
+	\frac{\rho_\Lambda}{\rho_{c,0}} \times \left( \frac{H_0}{H} \right)^2$$
+
+	Using the above relation between H and T:
+	$$ \frac{\rho_\Lambda}{\left(\frac{3H^2}{8\pi G}\right)} =
+	\frac{\rho_\Lambda}{\rho_{c,0}} \times \left( \frac{T_0}{T} \right)^4$$
+
+	Writing $\frac{\rho_\Lambda}{\rho_{c,0}}$ as $ \Omega_{\Lambda, 0} =
+	0.7$, (cosmological cosmological constant remains fixed).
+
+	$$ \frac{\rho_\Lambda}{\left(\frac{3H^2}{8\pi G}\right)} =
+	0.7 \times \left( \frac{1}{4.29 \times 10^{31}} \right)^4$$
+
+	$$ \frac{\rho_\Lambda}{\left(\frac{3H^2}{8\pi G}\right)} =
+	 9 \times 10^{-128}$$
+\end{solution}
+
+
+\begin{problem}
+	Convert the specific intensity in Eq. (1.9) into an expression for what
+	is plotted in
+	Fig. 1.7, the energy per area, time, frequency and steradian. Show that
+	the peak of a
+	2.73 K black-body spectrum does lie at $1/\lambda \simeq  5 cm^{-1}$. What frequency does this
+correspond to? (Source: \texttt{Exercise 1.4: Modern Cosmology - Scott Dodelson} )
+
+
+	For reference Eq. (1.9) is given by:
+	$$ I_\nu = \frac{4\pi\hbar}{c^2} \frac{\nu^3}{e^{2\pi\hbar\nu/k_BT} - 1} $$
+
+	And Fig. 1.7 is:
+        \center
+	\includegraphics[width=4in]{1}
+\end{problem}
+
+\begin{solution}
+	By differentiating equation by $\nu$ we get
+	$$ \frac{d I_\nu}{d\nu} = \frac{4\pi\hbar}{c^2} \frac{d}{d\nu}\left(
+		\frac{\nu^3}{e^{2\pi\hbar\nu/k_BT} - 1}\right) $$
+	$$ \frac{d I_\nu}{d\nu} =\frac{4\pi\hbar}{c^2} \left(
+		\frac{3\nu^2 (e^{2\pi\hbar\nu/k_BT} - 1) - \nu^3
+		(e^{2\pi\hbar\nu/k_BT} - 1) (\frac{2\pi\hbar}{k_B T})}{ (e^{2\pi\hbar\nu/k_BT} - 1)^2}
+		\right)$$
+
+	$$ \frac{d I_\nu}{d\nu} =\frac{4\pi\hbar}{c^2} \left(
+		\frac{3\nu^2  - \nu^3
+		 (\frac{2\pi\hbar}{k_B T})}{ e^{2\pi\hbar\nu/k_BT} - 1}
+		\right)$$
+
+
+	$$ \frac{d I_\nu}{d\nu} =\frac{4\pi\hbar \nu^2}{k_B Tc^2} \left(
+		\frac{3k_B T  - \nu
+		 (2\pi\hbar)}{ e^{2\pi\hbar\nu/k_BT} - 1}
+		\right)$$
+
+	Thus when equating it to zero to find the peak
+	$$ \frac{d I_\nu}{d\nu} = 0 = 3k_B T  - \nu
+		 (2\pi\hbar)$$
+		 This gives $$ v_{max} = \frac{3k_B T}{2\pi \hbar} $$
+
+	When $T = 2.73 K$, we get
+	$$ v_{max} = \frac{3(1.38 \times 10^{-23}) (2.73)}{6.6 \times 10^{-34}} $$
+	$$ v_{max} = 1.68 \times 10^{11} Hz $$
+
+	Using $ \lambda = \frac{c}{\nu}$
+	$$ \frac{1}{\lambda_{max}} = \frac{1.68 \times 10^{11}}{3\times 10^8}
+	m^{-1} $$
+	$$ \frac{1}{\lambda_{max}} = 5.59 \times 10^{2}m^{-1} $$
+	$$ \frac{1}{\lambda_{max}} \approx 5 cm^{-1} $$
+
+	Now in the given diagram the units used is $MJy/sr$ which is Mega Jansky
+	per Steridian, whose dimention is similar to RHS
+
+	$$ 1 Jy = 10^{-26} SI units $$
+	Thus
+	$$ Intensity[MJy/sr] = 10^{20} I_\nu (SI units) $$
+	Which is the same units used in the graph.
+
+
+\end{solution}
+
+\begin{problem}
+	At early times, the cosmological constant can be neglected. Using this
+	approximation, integrate Eq. (1.3) in a Euclidean universe to obtain a(t). Using
+	$T (t) = T_0/a(t)$,
+	determine the times when the cosmic temperature was 0.1 MeV and 1/4 eV.
+        (Source: \texttt{Exercise 2.5: Modern Cosmology - Scott Dodelson} )
+
+	For reference: Eq. (1.3) is the friedmann equation:
+	$$ H^2(t) = \frac{8\pi G}{3} \left[ \rho(t) + \frac{\rho_{cr} -
+	\rho(t_0)}{a(t)^2} \right] $$
+\end{problem}
+
+\begin{solution}
+
+	We know that the hubble rate is defined as:
+	$$ H(t) = \frac{\dot a }{a} = \frac{1}{a} \frac{da}{dt} $$
+
+	Using this time can be written as:
+	$$ dt = \frac{1}{a} \frac{da}{H(t)} $$
+	When value of $a$ goes from 0 to a.
+	$$ t = \int^a_0 \frac{1}{a} \frac{da}{H(t)} $$
+
+	Since the we ignore curvature and the cosmological constant we have:
+	$$ \left(\frac{H(t)}{H_0}\right)^2 = \frac{\Omega_{m,0}}{a^3} + \frac{\Omega_{r,0}}{a^4}  $$
+
+	Using this in the above equation we get:
+	$$ t = \frac{1}{H_0} \int^a_0 \frac{1}{a} \frac{da}{\sqrt{\frac{\Omega_{m,0}}{a^3} + \frac{\Omega_{r,0}}{a^4}}} $$
+	$$ H_0 t = \frac{1}{\sqrt{\Omega_{r,0}}} \int^a_0
+	\frac{a.da}{\sqrt{\frac{\Omega_{m,0}a}{\Omega_{r,0}} + 1}} $$
+
+	We can define $a_{rm} = \frac{\Omega_{r,0}}{\Omega_{m,0}}$
+	$$ H_0 t = \frac{1}{\sqrt{\Omega_{r,0}}} \int^a_0
+	\frac{a.da}{\sqrt{\frac{a}{a_{rm}} + 1}} $$
+	We can use taylor expansion to integrate this, and ignore higher terms:
+	$$ H_0 t = \frac{4a^2_{rm}}{3\sqrt{\Omega_{r,0}}}\left[ 1 - \left(1 -
+	\frac{a}{2a_{rm}}\right)\left( 1 + \frac{a}{a_{rm}} \right)^{1/2} \right] $$
+
+	Since the given temperatures we can estimate $a << a_{rm}$, when
+	radiation dominates.
+	$$ t  \approx  \frac{a^2}{2H_0\sqrt{\Omega_{r,0}}}$$
+
+	Using the temperature equation given in the question:
+	$$ T(t) = \frac{T_0}{a(t)} $$
+	$$ a(t) = \frac{T_0}{T(t)} $$
+	$$ a(t) = \frac{k_B T_0}{k_B T(t)} $$
+	Taking $k_B T_0 = 2.35\times 10^{-4} eV$ (CMB), and using
+
+	(i) $T(t) = 0.1 MeV = 10^5 eV$
+	$$ a(t) = 2.35 \times 10^{-9} $$
+	$$ t  =  \frac{a^2}{2H_0\sqrt{\Omega_{r,0}}}$$
+	Now taking $\Omega_{r,0} = 9 \times 10^{-5}$, $H_0^{-1} = 14.4 Gyr$
+	$$ t  = 4.19 \times 10^{-6} yr $$
+	$$ t  = 132 s $$
+
+	(ii) $T(t) = 0.25 eV$
+	$$ a(t) = 9.4 \times 10^{-4} $$
+	$$ t  =  \frac{a^2}{2H_0\sqrt{\Omega_{r,0}}}$$
+	$$ t  = 3.88 \times 10^5 yr $$
+
+
+\end{solution}
+
+\begin{problem}
+	How is the energy density of a gas of photons with a black-body spectrum
+	related to
+	the specific intensity of the radiation? That is, what is the relation
+	between $\rho_{\gamma}$ and $I_{\nu}$
+	defined in Eq. (1.9) (Source: \texttt{Exercise 2.8: Modern Cosmology - Scott Dodelson} )
+
+For reference Eq. (1.9) is given by:
+	$$ I_\nu = \frac{4\pi\hbar}{c^2} \frac{\nu^3}{e^{2\pi\hbar\nu/k_BT} - 1} $$
+
+
+\end{problem}
+
+\begin{solution}
+	WKT Energy density from frequency $\nu$ to $\nu+d\nu$, is given by:
+	$$ \epsilon(\nu)d\nu = \frac{8\pi h}{c^3}\frac{\nu^3d\nu}{e^{h\nu/k_BT} - 1} $$
+	$$ \epsilon(\nu) d\nu= \frac{16\pi^2\hbar}{c^3}\frac{\nu^3d\nu}{e^{2\pi
+	\hbar \nu/k_BT} - 1} $$
+	$$ \epsilon(\nu) d\nu= \frac{4\pi}{c} I_\nu d\nu$$
+
+	Writing $E_{mean} = pc = h\nu$ for radiation, we have
+	$$\frac{2\pi}{c} d\nu = dp \frac{1}{\hbar} $$
+	$$ \epsilon(\nu) d\nu= \frac{2}{\hbar} I_\nu dp$$
+
+	By integrating over all frequencies we have
+	$$ \epsilon = \frac{2}{\hbar} \int_{0}^{\infty} I_\nu dp$$
+
+\end{solution}
+
+\begin{problem}
+	A hypothesis once used to explain the Hubble relation is the “tired
+	light
+	hypothesis.” The tired light hypothesis states that the universe is not
+	expanding, but that photons simply lose energy as they move through
+	space (by some unexplained means), with the energy loss per unit
+	distance being given by the law
+
+	where k is a constant.
+	$$ \frac{dE}{dr} = -kE $$
+	Show that this hypothesis gives a distance–
+	redshift relation that is linear in the limit $z <<1$. What must the value
+	of
+	k be in order to yield a Hubble constant of $H_0 = 68 km s^{-1} Mpc^{-1}$?
+        (Source: \texttt{Exercise 2.4: Introduction to Cosmology - Barbara Ryden} )
+
+\end{problem}
+
+
+\begin{solution}
+        Given equation,
+	$$ \frac{dE}{dr} = -kE $$
+	can be written as
+	$$ E(r) = E_0 e^{-kr} $$
+
+	For light from stars we can write energy in terms of wave length as
+	$\lambda  = \frac{hc}{E}$
+
+	We can write redshift in terms of this wavelength as:
+	$$ z = \frac{\lambda_e - \lambda_0}{ \lambda_0 } = \frac{\frac{hc}{E} -
+	\frac{hc}{E_0}}{ \frac{hc}{E_0}}$$
+
+	$$ z = e^{kr} - 1 $$
+	Comparing this with the Hubble's equation:
+	$$ z = \frac{H_0}{c} r  $$
+        We have:
+	$$ \frac{H_0}{c}r = e^{kr} - 1 $$
+	By using taylor expansion:
+	$$ \frac{H_0}{c}r \approx kr $$
+	$$ k = \frac{H_0}{c} = 2.3 \times 10^{-4} Mpc^{-1}$$
+
+\end{solution}
+
+\begin{problem}
+	The principle of wave-particle duality tells us that a particle with momentum
+	p has an associated de Broglie wavelength of $\lambda = h/p$; this
+	wavelength increases as $\lambda \propto a$ as the universe expands. The total
+	energy density of a gas of particles can be written as $\epsilon = nE$, where n is
+	the number density of particles, and E is the energy per particle. For
+	simplicity, let’s assume that all the gas particles have the same mass
+	m and momentum p. The energy per particle is then simply
+	$$ E = (m^2c^4 + p^2 c^2)^{1/2} =   (m^2c^4 + h^2 c^2 / \lambda^2)^{1/2}$$
+	Compute the equation-of-state parameter w for this gas as a function
+	of the scale factor a. Show that $w = 1/3$ in the highly relativistic limi
+	$(a \rightarrow 0, p \rightarrow \infty)$ and that $w = 0$ in the highly nonrelativistic limit
+	$(a \rightarrow \infty, p \rightarrow 0)$.
+        (Source: \texttt{Exercise 4.5: Introduction to Cosmology - Barbara Ryden} )
+
+\end{problem}
+
+\begin{solution}
+        We can write Energy in terms of energy density as:
+	$$ \epsilon V = (m^2c^4 + h^2 c^2 / \lambda^2)^{1/2} $$
+	$$ \epsilon  = \frac{1}{V} (m^2c^4 + h^2 c^2 / \lambda^2)^{1/2} $$
+	We know that volume scales cubically and, $\lambda$ scales linearly:
+	$$ \epsilon  = \frac{1}{Va^3(t)} \left(m^2c^4 + \frac{h^2 c^2}{a^2(t)
+		\lambda^2} \right)^{1/2} $$
+
+	Taking log both sides
+	$$ \epsilon  =\frac{1}{V_0 a^3(t)} \left(m^2c^4 + \frac{p^2 c^2}{a^2(t)} \right)^{1/2} $$
+	$$ ln(\epsilon)  = -ln V_0 - 3 ln(a(t)) + \frac{1}{2} ln\left(m^2c^4 + \frac{p^2 c^2}{a^2(t)} \right) $$
+	Differentiate this equation by time:
+	$$ \frac{\dot \epsilon}{\epsilon}  = - 3 \frac{\dot a}{a} + \frac{1}{2}
+	\frac{ -2 \frac{p^2c^2 }{a(t)^3} \dot a}{\left(m^2c^4 + \frac{p^2 c^2}{a^2(t)} \right)} $$
+	$$ \frac{\dot \epsilon}{\epsilon} + 3 \frac{\dot a}{a} = - \frac{ p^2
+	}{\left( a(t)^2 m^2c^2 + p^2 \right)}\frac{\dot a}{a} $$
+	$$ \frac{\frac{\dot \epsilon}{\epsilon} + 3 \frac{\dot a}{a}}{\frac{3\dot a}{a}} = - \frac{ p^2
+	}{3\left( a(t)^2 m^2c^2 + p^2 \right)} $$
+
+	Now using fluid equation and equation of state:
+	$$ \dot \epsilon + 3 \frac{\dot a}{a}(\epsilon + P) = 0$$
+	$$ \dot \epsilon =- 3 \frac{\dot a}{a}(1+w)\epsilon$$
+	$$ \frac{\dot \epsilon}{\epsilon} =- 3 \frac{\dot a}{a}(1+w)$$
+	$$ \frac{\frac{\dot \epsilon}{\epsilon}}{\frac{3\dot a}{a}} =- (1+w)$$
+	$$ - \left(\frac{\frac{\dot \epsilon}{\epsilon}  +
+		\frac{3\dot a}{a}}{\frac{3\dot a}{a}}
+		\right) =w$$
+
+	Thus
+	$$ w = \frac{p^2}{3\left( a(t)^2 m^2c^2 + p^2 \right)}  $$
+	When $p\rightarrow \infty$
+	$$ w = \frac{1}{3\left( a(t)^2 \frac{m^2c^2}{p^2} + 1 \right)}  $$
+	$$ w = \frac{1}{3}  $$
+	When $p\rightarrow 0$
+	$$ w = 0 $$
+\end{solution}
+
+\begin{problem}
+
+	The components of tensor A are equal to the corresponding components of
+	tensor B in
+	one particular coordinate system denoted, by the superscript 0; that is,
+	$$ A_{ij}^0 = B_{ij}^0 $$
+	Show that tensor A is equal to tensor B, $A_{ij} = B_{ij}$ , in all coordinate
+	systems
+        (Source: \texttt{Exercise 4.1.2: Mathematical Methods for Physicists -
+	George B. Arfken} )
+\end{problem}
+
+\begin{solution}
+	Let us define a coordinate transformation from the coordinate system
+	$x^0_{ij}$ to say $x_{\alpha \beta}$.
+
+	Thus for any given vector $A^0_{ij}$ can be written in terms of the new
+	coordinate system as:
+	$$ A_{\alpha \beta} = \frac{dx_{\alpha}}{dx^0_{i}}
+	\frac{dx_{\beta}}{dx^0_{j}} A^0_{ij} $$
+
+	Since, $A^0_{ij} = B^0_{ij}$
+	$$ A_{\alpha \beta} = \frac{dx_{\alpha}}{dx^0_{i}}
+	\frac{dx_{\beta}}{dx^0_{j}} A^0_{ij} $$
+
+	$$ A_{\alpha \beta} = \frac{dx_{\alpha}}{dx^0_{i}}
+	\frac{dx_{\beta}}{dx^0_{j}} B^0_{ij} $$
+
+	Since the same transformation equation also applies to $B^0_{ij}$
+	($A^0 and B^0$) are defined in the same coordinate system:
+
+	$$ A_{\alpha \beta} = B_{\alpha \beta} $$
+
+	Therefore if components of tensor A and B are equal under one coordinate
+	system then they are also equal under any coordinate system as long as
+	we can define a transformation property between those coordinate systems.
+\end{solution}
+
+\end{document}

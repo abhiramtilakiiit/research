@@ -7,13 +7,13 @@
 \usepackage{xcolor}
 \usepackage{hyperref}
 \hypersetup{
-    colorlinks=true,
-    linkcolor=blue,
-    filecolor=magenta,
-    urlcolor=cyan,
-    pdftitle={Biomolecular Structures},
-    pdfpagemode=FullScreen,
-    }
+	colorlinks=true,
+	linkcolor=blue,
+	filecolor=magenta,
+	urlcolor=cyan,
+	pdftitle={Biomolecular Structures},
+	pdfpagemode=FullScreen,
+}
 
 \tolerance 99999
 \hbadness 99999
@@ -24,22 +24,22 @@
 \definecolor{backcolour}{rgb}{0.99,0.99,0.97}
 
 \lstdefinestyle{mystyle}{
-    backgroundcolor=\color{backcolour},
-    commentstyle=\color{codegreen},
-    keywordstyle=\color{magenta},
-    numberstyle=\tiny\color{codegray},
-    stringstyle=\color{codepurple},
-    basicstyle=\ttfamily\footnotesize,
-    breakatwhitespace=false,
-    breaklines=true,
-    captionpos=b,
-    keepspaces=true,
-    numbers=left,
-    numbersep=5pt,
-    showspaces=false,
-    showstringspaces=false,
-    showtabs=false,
-    tabsize=2
+	backgroundcolor=\color{backcolour},
+	commentstyle=\color{codegreen},
+	keywordstyle=\color{magenta},
+	numberstyle=\tiny\color{codegray},
+	stringstyle=\color{codepurple},
+	basicstyle=\ttfamily\footnotesize,
+	breakatwhitespace=false,
+	breaklines=true,
+	captionpos=b,
+	keepspaces=true,
+	numbers=left,
+	numbersep=5pt,
+	showspaces=false,
+	showstringspaces=false,
+	showtabs=false,
+	tabsize=2
 }
 
 \lstset{style=mystyle}
@@ -88,16 +88,6 @@ As instructed by my advisor, I have to pick a few problems and solve them
 as a part of my report. I have picked these problems from a combination of books
 as referenced.
 
-\begin{enumerate}
-	\item 1.1 (dodelson)
-	\item 1.4
-	\item 2.5
-	\item 2.8
-	\item 2.4 (ryden)
-	\item 4.5
-	\item 4.1.2 (arfken)
-\end{enumerate}
-
 \begin{problem}
 	Suppose that $H$ scales as temperature squared all the way back until
 	the time when the temperature of the universe was $10^{19} GeV/k_B$
@@ -134,51 +124,51 @@ as referenced.
 	0.7 \times \left( \frac{1}{4.29 \times 10^{31}} \right)^4$$
 
 	$$ \frac{\rho_\Lambda}{\left(\frac{3H^2}{8\pi G}\right)} =
-	 9 \times 10^{-128}$$
+	9 \times 10^{-128}$$
 \end{solution}
 
 
 \begin{problem}
 	Convert the specific intensity in Eq. (1.9) into an expression for what
 	is plotted in
-	Fig. 1.7, the energy per area, time, frequency and steradian. Show that
+	Fig. 1.7, the energy per area, time, frequency and steradians. Show that
 	the peak of a
 	2.73 K black-body spectrum does lie at $1/\lambda \simeq  5 cm^{-1}$. What frequency does this
-correspond to? (Source: \texttt{Exercise 1.4: Modern Cosmology - Scott Dodelson} )
+	correspond to? (Source: \texttt{Exercise 1.4: Modern Cosmology - Scott Dodelson} )
 
 
 	For reference Eq. (1.9) is given by:
 	$$ I_\nu = \frac{4\pi\hbar}{c^2} \frac{\nu^3}{e^{2\pi\hbar\nu/k_BT} - 1} $$
 
 	And Fig. 1.7 is:
-        \center
+	\center
 	\includegraphics[width=4in]{1}
 \end{problem}
 
 \begin{solution}
 	By differentiating equation by $\nu$ we get
 	$$ \frac{d I_\nu}{d\nu} = \frac{4\pi\hbar}{c^2} \frac{d}{d\nu}\left(
-		\frac{\nu^3}{e^{2\pi\hbar\nu/k_BT} - 1}\right) $$
+	\frac{\nu^3}{e^{2\pi\hbar\nu/k_BT} - 1}\right) $$
 	$$ \frac{d I_\nu}{d\nu} =\frac{4\pi\hbar}{c^2} \left(
 		\frac{3\nu^2 (e^{2\pi\hbar\nu/k_BT} - 1) - \nu^3
 		(e^{2\pi\hbar\nu/k_BT} - 1) (\frac{2\pi\hbar}{k_B T})}{ (e^{2\pi\hbar\nu/k_BT} - 1)^2}
-		\right)$$
+	\right)$$
 
 	$$ \frac{d I_\nu}{d\nu} =\frac{4\pi\hbar}{c^2} \left(
 		\frac{3\nu^2  - \nu^3
-		 (\frac{2\pi\hbar}{k_B T})}{ e^{2\pi\hbar\nu/k_BT} - 1}
-		\right)$$
+		(\frac{2\pi\hbar}{k_B T})}{ e^{2\pi\hbar\nu/k_BT} - 1}
+	\right)$$
 
 
 	$$ \frac{d I_\nu}{d\nu} =\frac{4\pi\hbar \nu^2}{k_B Tc^2} \left(
 		\frac{3k_B T  - \nu
-		 (2\pi\hbar)}{ e^{2\pi\hbar\nu/k_BT} - 1}
-		\right)$$
+		(2\pi\hbar)}{ e^{2\pi\hbar\nu/k_BT} - 1}
+	\right)$$
 
 	Thus when equating it to zero to find the peak
 	$$ \frac{d I_\nu}{d\nu} = 0 = 3k_B T  - \nu
-		 (2\pi\hbar)$$
-		 This gives $$ v_{max} = \frac{3k_B T}{2\pi \hbar} $$
+	(2\pi\hbar)$$
+	This gives $$ v_{max} = \frac{3k_B T}{2\pi \hbar} $$
 
 	When $T = 2.73 K$, we get
 	$$ v_{max} = \frac{3(1.38 \times 10^{-23}) (2.73)}{6.6 \times 10^{-34}} $$
@@ -191,7 +181,7 @@ correspond to? (Source: \texttt{Exercise 1.4: Modern Cosmology - Scott Dodelson}
 	$$ \frac{1}{\lambda_{max}} \approx 5 cm^{-1} $$
 
 	Now in the given diagram the units used is $MJy/sr$ which is Mega Jansky
-	per Steridian, whose dimention is similar to RHS
+	per steradians, whose dimension is similar to RHS
 
 	$$ 1 Jy = 10^{-26} SI units $$
 	Thus
@@ -206,16 +196,16 @@ correspond to? (Source: \texttt{Exercise 1.4: Modern Cosmology - Scott Dodelson}
 	approximation, integrate Eq. (1.3) in a Euclidean universe to obtain a(t). Using
 	$T (t) = T_0/a(t)$,
 	determine the times when the cosmic temperature was 0.1 MeV and 1/4 eV.
-        (Source: \texttt{Exercise 2.5: Modern Cosmology - Scott Dodelson} )
+	(Source: \texttt{Exercise 2.5: Modern Cosmology - Scott Dodelson} )
 
-	For reference: Eq. (1.3) is the friedmann equation:
+	For reference: Eq. (1.3) is the Friedmann equation:
 	$$ H^2(t) = \frac{8\pi G}{3} \left[ \rho(t) + \frac{\rho_{cr} -
 	\rho(t_0)}{a(t)^2} \right] $$
 \end{problem}
 
 \begin{solution}
 
-	We know that the hubble rate is defined as:
+	We know that the Hubble rate is defined as:
 	$$ H(t) = \frac{\dot a }{a} = \frac{1}{a} \frac{da}{dt} $$
 
 	Using this time can be written as:
@@ -234,7 +224,7 @@ correspond to? (Source: \texttt{Exercise 1.4: Modern Cosmology - Scott Dodelson}
 	We can define $a_{rm} = \frac{\Omega_{r,0}}{\Omega_{m,0}}$
 	$$ H_0 t = \frac{1}{\sqrt{\Omega_{r,0}}} \int^a_0
 	\frac{a.da}{\sqrt{\frac{a}{a_{rm}} + 1}} $$
-	We can use taylor expansion to integrate this, and ignore higher terms:
+	We can use Taylor expansion to integrate this, and ignore higher terms:
 	$$ H_0 t = \frac{4a^2_{rm}}{3\sqrt{\Omega_{r,0}}}\left[ 1 - \left(1 -
 	\frac{a}{2a_{rm}}\right)\left( 1 + \frac{a}{a_{rm}} \right)^{1/2} \right] $$
 
@@ -270,7 +260,7 @@ correspond to? (Source: \texttt{Exercise 1.4: Modern Cosmology - Scott Dodelson}
 	between $\rho_{\gamma}$ and $I_{\nu}$
 	defined in Eq. (1.9) (Source: \texttt{Exercise 2.8: Modern Cosmology - Scott Dodelson} )
 
-For reference Eq. (1.9) is given by:
+	For reference Eq. (1.9) is given by:
 	$$ I_\nu = \frac{4\pi\hbar}{c^2} \frac{\nu^3}{e^{2\pi\hbar\nu/k_BT} - 1} $$
 
 
@@ -306,13 +296,13 @@ For reference Eq. (1.9) is given by:
 	redshift relation that is linear in the limit $z <<1$. What must the value
 	of
 	k be in order to yield a Hubble constant of $H_0 = 68 km s^{-1} Mpc^{-1}$?
-        (Source: \texttt{Exercise 2.4: Introduction to Cosmology - Barbara Ryden} )
+	(Source: \texttt{Exercise 2.4: Introduction to Cosmology - Barbara Ryden} )
 
 \end{problem}
 
 
 \begin{solution}
-        Given equation,
+	Given equation,
 	$$ \frac{dE}{dr} = -kE $$
 	can be written as
 	$$ E(r) = E_0 e^{-kr} $$
@@ -327,7 +317,7 @@ For reference Eq. (1.9) is given by:
 	$$ z = e^{kr} - 1 $$
 	Comparing this with the Hubble's equation:
 	$$ z = \frac{H_0}{c} r  $$
-        We have:
+	We have:
 	$$ \frac{H_0}{c}r = e^{kr} - 1 $$
 	By using taylor expansion:
 	$$ \frac{H_0}{c}r \approx kr $$
@@ -348,17 +338,17 @@ For reference Eq. (1.9) is given by:
 	of the scale factor a. Show that $w = 1/3$ in the highly relativistic limi
 	$(a \rightarrow 0, p \rightarrow \infty)$ and that $w = 0$ in the highly nonrelativistic limit
 	$(a \rightarrow \infty, p \rightarrow 0)$.
-        (Source: \texttt{Exercise 4.5: Introduction to Cosmology - Barbara Ryden} )
+	(Source: \texttt{Exercise 4.5: Introduction to Cosmology - Barbara Ryden} )
 
 \end{problem}
 
 \begin{solution}
-        We can write Energy in terms of energy density as:
+	We can write Energy in terms of energy density as:
 	$$ \epsilon V = (m^2c^4 + h^2 c^2 / \lambda^2)^{1/2} $$
 	$$ \epsilon  = \frac{1}{V} (m^2c^4 + h^2 c^2 / \lambda^2)^{1/2} $$
 	We know that volume scales cubically and, $\lambda$ scales linearly:
 	$$ \epsilon  = \frac{1}{Va^3(t)} \left(m^2c^4 + \frac{h^2 c^2}{a^2(t)
-		\lambda^2} \right)^{1/2} $$
+	\lambda^2} \right)^{1/2} $$
 
 	Taking log both sides
 	$$ \epsilon  =\frac{1}{V_0 a^3(t)} \left(m^2c^4 + \frac{p^2 c^2}{a^2(t)} \right)^{1/2} $$
@@ -378,7 +368,7 @@ For reference Eq. (1.9) is given by:
 	$$ \frac{\frac{\dot \epsilon}{\epsilon}}{\frac{3\dot a}{a}} =- (1+w)$$
 	$$ - \left(\frac{\frac{\dot \epsilon}{\epsilon}  +
 		\frac{3\dot a}{a}}{\frac{3\dot a}{a}}
-		\right) =w$$
+	\right) =w$$
 
 	Thus
 	$$ w = \frac{p^2}{3\left( a(t)^2 m^2c^2 + p^2 \right)}  $$
@@ -397,7 +387,7 @@ For reference Eq. (1.9) is given by:
 	$$ A_{ij}^0 = B_{ij}^0 $$
 	Show that tensor A is equal to tensor B, $A_{ij} = B_{ij}$ , in all coordinate
 	systems
-        (Source: \texttt{Exercise 4.1.2: Mathematical Methods for Physicists -
+	(Source: \texttt{Exercise 4.1.2: Mathematical Methods for Physicists -
 	George B. Arfken} )
 \end{problem}
 
@@ -426,5 +416,255 @@ For reference Eq. (1.9) is given by:
 	system then they are also equal under any coordinate system as long as
 	we can define a transformation property between those coordinate systems.
 \end{solution}
+
+\section{Book Summary}
+
+I have read parts of 3 different books as a part of my summer project and I
+would like to include a brief summary of all the chapters I've read knowledge
+that I've gained.
+
+\subsection{Introduction to Cosmology}
+
+This book is aim at undergrad students, and is fairly recent in
+terms of its contents. Unlike other cosmology books, this book focusses on
+building of intuition stepwise, and is far less math intensive at
+the same time avoids over-simplification of concepts.
+
+\paragraph{Chapter 1: Introduction}
+
+The book begins by laying a solid foundation for the study of cosmology:
+
+\begin{itemize}
+	\item Introduces various notations and units commonly used in the field
+	\item Covers different units for mass, time, distance, and luminosity
+	\item Briefly touches on Planck units, though they are not extensively used later
+	\item Provides a philosophical and historical context for cosmology, tracing its roots
+		to the pre-modern era
+\end{itemize}
+
+\paragraph{Chapter 2: Fundamental Observations}
+
+This chapter delves into the core astronomical observations that form the basis of modern cosmology:
+
+\begin{itemize}
+	\item Presents key astronomical observations and their current explanations
+	\item Discusses how these observations lead to various postulates and
+		theories and introduces different observational methods used by
+		astronomers and cosmologists
+	\item Some important concepts discussed include:
+		\begin{itemize}
+			\item Olber's paradox: Which stems from an observation
+				that 'sky is dark' and then builds up on
+				different conclusion that can be made about
+				current state of universe
+			\item Homogeneity and Isotropy: An important concept
+				which allows us to make very useful
+				approximations about the state of current
+				cosmos.
+			\item Hubble's Law: Starting from redshift this law is
+				sets the record for most of the mathematical
+				calculations in cosmology. Also introduces
+				different models of universe like Big Bang and
+				Steady-state model, goes over different aspects
+				of each.
+			\item Cosmic Wave Background: Is important observation
+				which leads us into using the Big-Bang model for
+				rest of the book.
+		\end{itemize}
+	\item Covers essential prerequisites, including Properties of different particles and Characteristics of neutrinos and photons
+	\item Sets the theoretical groundwork for the rest of the book
+
+\end{itemize}
+
+\paragraph{Chapter 3: Newton Vs. Einstein}
+
+Since cosmology involves using a mixture of classical Newtonian mechanics but at
+the same time taking advantage of modern concepts like relativity, a chapter
+like this is mandatory to provide a brief overview of both classical and
+derived laws of physics useful for our calculations.
+
+\begin{itemize}
+	\item Chapter starts by going over historical evolution of the concept
+		of gravity and how Newton interpreted gravity along with
+		Poisson's equation.
+	\item Dedicates a whole section to touch upon newton's special theory of
+		relativity, by taking different examples and introducing
+		space-time and Minkowski metrics. Does a good job in slowly
+		introducing relativity without nose-diving into complexities
+		like four vectors and Lorentz transformations
+	\item Builds up intuition for space-time curvature and General Theory of
+		Relativity using various examples involving Elevators and light
+		beams.
+	\item Introduces curvature, but doesn't involve proofs for most of the
+		results but just touches on fundamental results for measuring
+		length in uniform positive and negative curved spaces.
+	\item Finally shows the General Theory equivalent of Minkowski metric
+		(Robertson-Walker metric) and how we can use that to find
+		something called "proper distance", which is the standard way
+		that we will be measuring cosmological distances moving forward.
+\end{itemize}
+
+\paragraph{Chapter 4: Cosmic Dynamics}
+
+This is the point where it feels like the core Cosmological concepts and
+required equations and laws are introduced. Introduces various notations
+used throughout Cosmology and also involves proves for various laws and theorems
+that are mentioned in text.
+
+\begin{itemize}
+	\item Starts off by dropping the Einstein's Field Equation, and goes on about how it
+is difficult to solve it and there needs to be a better estimate which relates
+the energy density with terms like curvature and scaling factor.
+\item Then there is a
+step by step proof building up on the so called "Friedmann Equation" right from
+the Newton's Gravitational law, which sets
+the premise for all analysis that we perform on the present universe.
+\item Similarly there is another fairly important equation called "Fluid Equation" or
+the "Continuity Equation", which can be derived from the laws of Thermodynamics.
+Using these both equations, we derive the "acceleration equation" or the "Second
+Friedmann Equation".
+\item Finally we come up with a relation called "state" equation, which in itself is
+not that useful, except we can solve the equation for different components.
+\item After introducing all the above equations, the book takes us to analysis
+different components of universe and comes up with a controversial "dark energy"
+term that equalizes the failed measurements of Hubble's constant.
+\end{itemize}
+
+\paragraph{Chapter 5: Model Universes}
+
+Applying the knowledge from the previous chapter about different components
+that make up universe like (matter, radiation, dark energy), we can now create
+"model" universes, which are special cases of our present universe. We can
+derive useful results which can help us arrive at interesting observations and
+theories which are opposed to the currently proposed Big Bang model.
+
+\begin{itemize}
+	\item Firstly, the chapter solves the state equation and the fluid equation to arrive at a
+		relation between energy density of a component vs. its
+		dependence on scaling factor of the universe, which is useful to
+		analyse how different components scale
+	\item Use the above relation to solve the Friedmann equation to arrive
+		at a new form of the equation which is particularly useful for
+		analysing the rate of universe expansion. We also write the
+		curvature term in terms of critical density since it gives a
+		better split between ratios of different components.
+	\item Model universes are of different types; Empty Universe (only
+		curvature), Single Component (flat universe, only one component)
+		and Multi-Universe system which are mixture of any two or three
+		of above. The main reason we adopt such a differential splitting
+		is because solving the equation with 4-5 terms and taking
+		integral can be difficult.
+	\item A common method to solve these model universes is to find a
+		relation between scaling factor and time and then using it to
+		calculate the age of the universe and find good estimations for
+		proper distance.
+	\item Using the conclusions drawn from above we can create a "Benchmark"
+		universe which is a rough estimate of the present universe which
+		is obtained by results from above  model universes.
+
+\end{itemize}
+
+\paragraph{Chapter 6: Solving for Cosmological Parameters}
+
+This chapter goes over how most of the conclusions about the universe can be
+drawn by solving for just two constants in the universe $H_0$ (Hubble's constant)
+and $q_0$ (deceleration Constant). We already know of the Hubble's constant but
+the deceleration constant is basically the second degree coefficient obtained
+after Taylor expanding the expansion coefficient. There are many ways in which
+astronomers can make observations and attempt to estimate these both values.
+
+\begin{itemize}
+	\item When we solve for proper distance in terms of $q_0$ and $H_0$, we
+		get it in terms of lookback time, but the book mentions how this
+		is not a good metric and this needs to be converted to a more
+		measurable quantity like redshift.
+	\item Then the chapter shows some popular methods in which cosmological
+		distances are measured by astronomers like "Angular Diameter
+		Distance", "Luminosity Distance" and "Bolometric Distance".
+		All these distances measured have to be scaled when scaling of
+		the universe it taking into account.
+	\item All above forms of distance measures have their own advantages and
+		disadvantages but Luminosity distance is the most widely used,
+		ones and require us to have a "standard candle", whose
+		luminosity is known to us, to help measure the value.
+	\item The instrument used to measure this distance is called Bolometer.
+		There are many celestial objects that can serve as Standard
+		candles but Cepheids (10 Mpc range) and Type IA Super Nove stars
+		(> 100 Mpc ), act as good candles, because of their high and periodic
+		luminosity properties.
+\end{itemize}
+
+\paragraph{Chapter 7: Dark matter}
+
+I didn't really get to have a full presentation of this chapter, but I still
+read it, so here's a summary.
+
+This chapter focusses on constructing the idea of dark matter, what it is and
+how it is represented mathematically. The chapter first tries to perform
+estimations of Stellar Density (energy density corresponding to stars), using
+the luminosity to mass ratio, and other known quantities like initial mass
+index. Then the it shows some popular astronomical observations made on a far
+cluster called "COMA" clusters. X-ray spectroscopy reveals that stellar mass of
+the galaxy just accommodates upto 5\% of the matter density. A lot of it is just
+cosmic gas floating around between clusters and galaxies, but even after
+considering these cosmic waste and gases we only get upto fifth of the matter
+density. The book then finally
+defines dark matter, as matter which do not interact with
+like electromagnetic fields and hence difficult to detect.
+
+
+\subsection{Mathematical Methods of Physicists - Tensors}
+
+I was told to read up some parts of Tensors from this book until I am familiar
+enough with the covariant and contravariant notations and
+Christoffel Symbols, etc.
+
+
+\paragraph{Covariant and Contravariant Tensors:}
+
+Covariant tensors transform with the coordinate system, while contravariant tensors transform inversely.
+Covariant tensor components are denoted with subscripts, contravariant with superscripts.
+The distinction is crucial in general relativity and differential geometry.
+
+\paragraph{Basic Operations on Tensors:}
+
+Tensors of the same rank and type can be added or subtracted component-wise.
+The result is a tensor of the same rank and type as the operands.
+This operation is only defined for tensors in the same coordinate system.
+
+\paragraph{Symmetry and Isotropic Tensors:}
+
+A tensor is symmetric if it remains unchanged when any pair of its indices are interchanged.
+Symmetry reduces the number of independent components in a tensor.
+Many physical quantities, like the stress tensor, are represented by symmetric tensors.
+
+Isotropic tensors have components that are invariant under rotations of the coordinate system.
+They are used to describe properties of materials that are the same in all directions.
+The Kronecker delta and Levi-Civita symbol are examples of isotropic tensors.
+
+\paragraph{Contraction and Direct Product:}
+
+Contraction reduces a tensor's rank by summing over a pair of indices.
+It's often used to extract scalar quantities from higher-rank tensors.
+The trace of a matrix is an example of tensor contraction.
+
+The direct product combines two tensors to form a higher-rank tensor.
+It's denoted by the symbol $\otimes$ and is also called the tensor product.
+The resulting tensor's rank is the sum of the ranks of the input tensors.
+
+\paragraph{Inverse Transformations:}
+
+Inverse transformations convert contravariant tensors to covariant tensors and vice versa.
+They are crucial for maintaining tensor equations' form invariance under coordinate changes.
+The metric tensor and its inverse play a key role in these transformations.
+
+\section{Conclusion}
+
+The nature of my research field requires a strong foundation in advanced
+Mathematics and Physics. While many Dual-Degree students have begun engaging
+with current literature, my initial focus will be on acquiring the requisite
+theoretical background and reading various text-books. Consequently, the majority of my first-year research
+activities will involve studying theory. I feel this preparatory phase is essential before transitioning into an
+exploration of state-of-the-art research in the field.
 
 \end{document}

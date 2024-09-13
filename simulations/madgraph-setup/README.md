@@ -36,6 +36,5 @@ If you want to run a script in madgraph:
 
 ```{.sh}
 docker exec -it madgraph "mg5_aMC bhabha_scattering.mg5"
-docker exec -it madgraph "bash script.sh"
 ```
 

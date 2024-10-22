@@ -1,6 +1,10 @@
 ARG BUILDER_IMAGE=python:3.10-slim-bullseye
 FROM ${BUILDER_IMAGE} as base
 
+
+
+######################## BUILDER ####################################
+
 FROM base as builder
 
 USER root
@@ -8,7 +12,7 @@ WORKDIR /
 
 SHELL [ "/bin/bash", "-c" ]
 
-# Set PATH to pickup virtualenv by default
+# Install build deps and python venv
 ENV PATH=/usr/local/venv/bin:"${PATH}"
 RUN apt-get -qq -y update && \
     apt-get -qq -y install --no-install-recommends \
@@ -116,28 +120,6 @@ RUN mkdir /code && \
     rm -rf /code
 
 
-# Install HepMC2 for backwards compatibility of MadgraphNLO
-ARG HEPMC_VERSION=2.06.11
-RUN mkdir /code && \
-    cd /code && \
-    wget http://hepmc.web.cern.ch/hepmc/releases/hepmc${HEPMC_VERSION}.tgz && \
-    tar xvfz hepmc${HEPMC_VERSION}.tgz && \
-    mv HepMC-${HEPMC_VERSION} src && \
-    cmake \
-      -DCMAKE_CXX_COMPILER=$(which g++) \
-      -DCMAKE_BUILD_TYPE=Release \
-      -Dbuild_docs:BOOL=OFF \
-      -Dmomentum:STRING=MEV \
-      -Dlength:STRING=MM \
-      -DCMAKE_INSTALL_PREFIX=/usr/local/venv \
-      -S src \
-      -B build && \
-    cmake build -L && \
-    cmake --build build -- -j$(($(nproc) - 1)) && \
-    cmake --build build --target install && \
-    rm -rf /code
-
-
 # Install MadGraph5_aMC@NLO for Python 3 and PYTHIA 8 interface
 ARG MG_VERSION=3.5.5
 ARG MG5aMC_PY8_INTERFACE_VERSION=1.3
@@ -145,7 +127,7 @@ RUN cd /usr/local/venv && \
     wget --quiet https://launchpad.net/mg5amcnlo/3.0/3.5.x/+download/MG5_aMC_v${MG_VERSION}.tar.gz && \
     mkdir -p /usr/local/venv/MG5_aMC && \
     tar -xzvf MG5_aMC_v${MG_VERSION}.tar.gz --strip=1 --directory=MG5_aMC && \
-    rm MG5_aMC_v${MG_VERSION}.tar.gz && \
+    rm MG5_aMC_v${MG_VERSION}.tar.gz
 
 
 # Change the MadGraph5_aMC@NLO configuration settings
@@ -157,8 +139,44 @@ RUN sed -i '/fastjet =/s/^# //g' /usr/local/venv/MG5_aMC/input/mg5_configuration
     sed -i 's|# fortran_compiler.*|fortran_compiler = '$(command -v gfortran)'|g' /usr/local/venv/MG5_aMC/input/mg5_configuration.txt && \
     sed -i 's|# f2py_compiler_py3.*|f2py_compiler_py3 = '$(command -v f2py)'|g' /usr/local/venv/MG5_aMC/input/mg5_configuration.txt
 
-FROM base
 
+# Install ROOT deps
+RUN apt-get -qq -y update && \
+    apt-get -qq -y install --no-install-recommends \
+	ca-certificates curl davix-dev dcap-dev \
+	fonts-freefont-ttf libafterimage-dev libcfitsio-dev \
+	libfcgi-dev libfftw3-dev libfreetype6-dev libftgl-dev \
+	libgfal2-dev libgif-dev libgl2ps-dev libglew-dev \
+	libglu-dev libgraphviz-dev libgsl-dev libjpeg-dev \
+	liblz4-dev liblzma-dev default-libmysqlclient-dev libpcre2-dev \
+	libpcre3-dev libpng-dev libpq-dev libsqlite3-dev \
+	libssl-dev libtbb-dev libtiff-dev libx11-dev libxext-dev \
+	libxft-dev libxml2-dev libxpm-dev libxxhash-dev \
+	libvdt-dev libz-dev libzstd-dev locales \
+	nlohmann-json3-dev python3-dev python3-numpy \
+	srm-ifce-dev unixodbc-dev python-is-python3 \
+	xrootd-plugins && \
+    apt-get -y clean && \
+    apt-get -y autoremove && \
+    rm -rf /var/lib/apt/lists/*
+
+
+# Install ROOT
+ARG ROOT_VERSION=6.32.04
+RUN mkdir /code && \
+    cd /code && \
+    wget https://root.cern/download/root_v${ROOT_VERSION}.source.tar.gz -O root_v${ROOT_VERSION}.tar.gz && \
+    tar xf root_v${ROOT_VERSION}.tar.gz && \
+    mkdir root_build root_install && cd root_build && \
+    cmake -DCMAKE_INSTALL_PREFIX=/usr/local/venv ../root-${ROOT_VERSION} && \
+    cmake --build . -- install -j$(($(nproc) - 1)) && \
+    rm -rf /code
+
+
+
+#########################  RUNNER  ####################################
+
+FROM base
 USER root
 
 SHELL [ "/bin/bash", "-c" ]
@@ -195,6 +213,7 @@ RUN adduser \
     chown -R moby /docker && \
     printf '\nexport PATH=/usr/local/venv/bin:"${PATH}"\n' >> /root/.bashrc && \
     printf '\nexport PATH=/usr/local/venv/MG5_aMC/bin:"${PATH}"\n' >> /root/.bashrc && \
+    printf '\nsource /usr/local/venv/bin/thisroot.sh\n' >> /root/.bashrc && \
     cp /root/.bashrc /etc/.bashrc && \
     echo 'if [ -f /etc/.bashrc ]; then . /etc/.bashrc; fi' >> /etc/profile && \
     echo "SHELL=/bin/bash" >> /etc/environment
@@ -203,7 +222,7 @@ USER moby
 
 ENV USER ${USER}
 ENV HOME /home/moby
-WORKDIR ${HOME}/work
+WORKDIR ${HOME}
 
 COPY --from=builder --chown=moby /usr/local/venv /usr/local/venv/
 
@@ -212,13 +231,15 @@ COPY --from=builder --chown=moby /usr/local/venv /usr/local/venv/
 ENV LC_ALL=C.UTF-8
 ENV LANG=C.UTF-8
 
+# add some global environment variables
 ENV PATH=${HOME}/.local/bin:/usr/local/venv/bin:"${PATH}"
 ENV PATH=/usr/local/venv/MG5_aMC/bin:$PATH
 ENV PYTHONPATH=/usr/local/venv/lib:$PYTHONPATH
 ENV LD_LIBRARY_PATH=/usr/local/venv/lib:$LD_LIBRARY_PATH
+ENV CPLUS_INCLUDE_PATH=/usr/local/venv/include:$CPLUS_INCLUDE_PATH
+ENV C_INCLUDE_PATH=/usr/local/venv/include:$C_INCLUDE_PATH
 
 
-# TODO: Install NLO dependencies independently for greater control
 # Running the NLO process forces install of cuttools and iregi
 RUN cp /etc/profile ${HOME}/.profile && \
     printf '\nexport PATH=/usr/local/venv/bin:"${PATH}"\n' >> "${HOME}"/.bashrc && \

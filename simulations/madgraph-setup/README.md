@@ -1,6 +1,6 @@
 # Setup Madgraph5 AMC with NLO deps
 
-Credits to: [MadGraph5_aMC-NLO Docker Image](https://github.com/scailfin/MadGraph5_aMC-NLO)
+Credits to: [MadGraph5\_aMC-NLO Docker Image](https://github.com/scailfin/MadGraph5_aMC-NLO)
 
 ## Software
 
@@ -12,8 +12,10 @@ The Docker image contains installations for:
 - LHAPDF v6.5.4
 - FastJet v3.3.4
 - PYTHIA v8.312
-- HepTools - Ninja, Collier
+- ROOT v6.32.04
+- HepTools - Ninja, Collier, cuttools, iregi (from aMC shell)
 
+To update these versions, change the `build_args` in `build.sh`.
 
 ## Setup Instructions 
 

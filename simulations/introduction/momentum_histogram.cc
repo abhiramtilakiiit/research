@@ -12,6 +12,9 @@ main() {
     pythia.readString("Beams:idB = 2212");
     pythia.readString("SoftQCD:all = on");
     pythia.readString("HardQCD:all = on");
+
+    Pythia8::Hist hpz("Momentum (Pz) distribution", 100, -10, 10);
+
     pythia.init();
 
     for (int i = 0; i < n; i++) {
@@ -32,11 +35,20 @@ main() {
             double py = pythia.event[j].py();
             double pz = pythia.event[j].pz();
 
+            hpz.fill(pz);
+
             double p_abs = sqrt(pow(px, 2) + pow(py, 2) + pow(pz, 2));
             std::cout << "\tid: " << id << "\tmass: " << m
                       << "\tmomentum: " << p_abs << std::endl;
         }
     }
+
+    std::cout << hpz << std::endl;
+
+    Pythia8::HistPlot hpl("myhistplot");
+    hpl.frame("histout", "Momentum (Pz) Distribution", "Momentum (Pz)", "Entries");
+    hpl.add(hpz);
+    hpl.plot();
 
     return 0;
 }

@@ -16,13 +16,27 @@ Then follow the respective steps for each:
 
 ## Pythia8
 
-Setup use the Makefile to compile all the examples.
+If you are not using above docker image you can, download 
+[Pythia8](https://pythia.org/download/pythia83/pythia8312.tgz), extract it and compile it.
+
+To setup use the Makefile to compile all the samples.
+Please pass in the custom variable `PYTHIA_DIR` if your installation doesn't use above
+docker-setup.
 Just run `make` in the directory to generate the files.
 
-Recommended way to run is `./executable > output.txt`
+The pythia library location should also be added in `LD_LIBRARY_PATH` varible,
+before executing, if you are not using the dockerized setup.
+Recommended way to run is `./executable > output.txt`.
 
-### Simulating a Proton
+## ROOT
 
-Simulating a proton collision requires us to have a `SoftQCD:all` and `HardQCD:all`
-modes to be enabled because this is a hardon collision.
+Root is also provided as a part of the dockerized image. But there is platform
+packages available in the [website](https://root.cern/install/all_releases/).
+The installation steps involve downloading and extracting the tar, and then
+sourcing the suitable `thisroot` script found in the bin directory.
+
+The Makefile already contains the additional libraries and flags required to run
+the root file. To open the output root file in rootAnalsyer, type `root
+output_file.root`
+
 

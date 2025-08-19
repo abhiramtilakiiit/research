@@ -9,6 +9,13 @@
 \usepackage{amsmath,amssymb}
 \usepackage{multicol}
 
+\usepackage{booktabs}
+
+\newcommand{\la}{\mathcal{L}}
+\newcommand{\ma}{\mathcal{M}}
+\newcommand{\ua}{\mathcal{U}}
+
+
 
 \usepackage{listings}
 \geometry{letterpaper}
@@ -334,9 +341,8 @@ using the Scan() function, the output can be found in the figure \ref{table}
 
 We can then open the root file-system corresponding to the file and browse
 through it by spawning a TBrowser instance. (\texttt{new TBrowser}).
-
-
-\begin{figure}[!ht]
+\clearpage
+\begin{figure}[!htb]
   \includegraphics[width=0.8\textwidth]{table.png}
   \caption{Tabulated values recorded in simulation into the TTree}
   \label{table}
@@ -351,13 +357,13 @@ defaults are usuallly high, but can be adjusted by mouse scroll.
 Figure \ref{size-hist} and \ref{pz-hist} show some screenshots of the TBrowser
 in action.
 
-\begin{figure}[!ht]
+\begin{figure}[!htb]
   \includegraphics[width=0.8\textwidth]{size-hist.png}
   \caption{Histogram for size (number of particles in an event) in TBrowser}
   \label{size-hist}
 \end{figure}
 
-\begin{figure}[!ht]
+\begin{figure}[!htb]
   \includegraphics[width=0.9\textwidth]{pz-hist.png}
   \caption{Histogram for Pz (Momentum in Z-direction) in TBrowser}
   \label{pz-hist}
@@ -381,7 +387,6 @@ The
 output from this histogram can also be stored and passed around to other tools
 like Geant4.
 
-\clearpage
 
 \begin{figure}[!htb]
   \includegraphics[width=0.9\textwidth]{m-hist.png}
@@ -600,7 +605,7 @@ learns to reconstruct them.
 
 \begin{itemize}
   \item Randomly masks a very high portion of image patches
-(typically 75%)
+(typically 75\%)
 \item Uses much higher masking ratio than NLP because
 images have more redundant information
 \item This forces the model to understand the overall image
@@ -621,20 +626,175 @@ In next section discusses a brief overview particular paper which can be seen as
 an effort to adapt MLM into High energy physics.
 
 \pagebreak
-\section{Masked Particle Modelling}
+\section{\href{https://arxiv.org/abs/2401.13537}{Masked Particle Modelling (July 2024)}}
 
+\footnote{Some parts of these report are from this
+\href{https://github.com/abhiramtilakiiit/research/blob/main/presentations/seminar/main.pdf,
+please refer to it for a more detailed explantion involving analysing results
+and more information about the training procedure}{presentation}}The paper Masked Particle Modelling introduces a self-supervised model designed to process unordered sets of particles, characterized by specific parameters, as input. The primary objective of this research is to develop a versatile foundational model that can subsequently be fine-tuned for a variety of downstream tasks, thereby demonstrating its adaptability and broad applicability.
+
+Inspired by masking strategies employed in models like BERT and BEiT, the authors propose a novel approach for masking a subset of particles within each jet. This technique challenges the model to predict the masked particles based on the contextual information derived from the remaining particles. The resulting model is thus designed to infer the original particle set effectively, leveraging the inherent relationships within the data.
+
+\paragraph{Why to mask the tokens?}
+In BERT the MLM model gave it a dramatic
+improvement over previous state-of-the-art models and served as on of the
+earliest examples of large language model.
+Traditional language models process text sequentially, either from left to right
+or right to left. This method limits the model’s awareness to the immediate
+context preceding the target word.
+By masking random tokens, the model is forced to use both left and right
+context to predict the masked word. This enables the model to learn
+bidirectional representations, unlike traditional left-to-right language mode
+
+\subsection{Challenges Faced during Adaptation}
+
+
+The results from models in NLP seem promising, but there are a few fundamental
+problems in dataset in the context of HEP which differ the training scheme used,
+which need to be addressed:
+\begin{itemize}
+  \item \textbf{Tokenization:} Unlike language models, which operate on a finite and
+discrete vocabulary of words, many of the features one that describe particles
+are continuous, such as momentum, direction, distance of closest approach to
+the primary collision, etc. This changes the way we pass the input or parse
+the output when pre-training.
+
+\item \textbf{Permuation of datasets:} The particles in a jet don’t have a specific order,
+so it makes sense to use a model that treats them all equally. However, if we
+replace all masked particles with the same placeholder, the model can’t tell
+them apart. This means it would produce the same output for all masked
+particles, which isn’t very useful. To avoid this problem, we need to either
+give the particles an order or add some way for them to interact with each
+other uniquely
+\end{itemize}
+
+
+\subsection{Experimenting different Tokenization Strategies and Ordering Strategies}
+
+The paper explores several methods for tokenizing the input particle sets, each with distinct characteristics and limitations.
+
+\begin{itemize}
+\item The first method, Simple Binning, involves dividing each feature into a finite set of discrete ranges, or bins. This straightforward approach assigns particles to bins based on their feature values. However, it suffers from a significant limitation: the lack of contextual information about the relationships between particles, which may undermine its effectiveness in capturing complex interactions.
+
+\item The second method employs a Vector Quantized Variational AutoEncoder
+  (VQ-VAE), this encoder is really popular in the field of computer vision. This approach utilizes an encoder to map input features to latent vectors, which are then projected onto the nearest element in a finite codebook. By incorporating context from all input elements, this method ensures that each particle is encoded with consideration of the other particles in the jet. While VQ-VAE provides a more context-aware representation, it is more complex to implement and potentially computationally expensive.
+
+\item Lastly, the paper considers K-means Clustering as a tokenization strategy. Using the K-means++ algorithm, particles are grouped into clusters, with each cluster assigned a unique index as its label. Unlike VQ-VAE, this method is context-independent and does not account for the relationships between particles. As a result, it may fail to capture important interactions within the particle set, despite being simpler to implement
+\end{itemize}
+
+The following ordering strategies have been experimented with:
+\begin{itemize}
+  \item \textbf{Ordering the input to the backbone:} Order particles by decreasing
+transverse momentum (pT) at the input stage of the model.
+
+Limitation: Breaks permutation invariance for all downstream tasks, which
+may adversely affect predictive performance.
+\item \textbf{Ordering only at the input to the pre-training prediction:} This method
+helps break symmetry for masked predictions without affecting the
+backbone’s permutation invariance.
+Apply pT ordering just before the prediction head, using learned positional
+embeddings.
+
+Limitation: Adds complexity to the model architecture and may increase
+computational cost, though less severe than method 2
+\end{itemize}
+
+Figure \ref{tokentable} shows the the, accuracy found with different combination
+of ordering and Tokenization strategies used
+
+
+\begin{table}[ht!]
+\centering
+\begin{tabular}{@{}llll@{}}
+\toprule
+\textbf{Ordering} & \textbf{Inputs}     & \textbf{Loss}               & \textbf{Accuracy} \\ \midrule
+no ordering       & continuous VQ-VAE   & classification              & 54.1\%            \\
+order head        & continuous VQ-VAE   & classification              &\textbf{56.8\%}            \\
+order backbone    & continuous VQ-VAE   & classification              & 53.4\%            \\
+order head        & quantized VQ-VAE    & classification              & 51.1\%            \\
+order head        & quantized K-means   & classification              & 49.3\%            \\
+order head        & continuous K-means  & classification              & 56.2\%            \\
+order head        & continuous          & regression                  & 48.9\%            \\
+order backbone    & continuous          & regression                  & 46.3\%            \\ \bottomrule
+\end{tabular}
+\caption{Results for different input orderings, loss functions, and tokenization strategies.}
+\label{tokentable}
+\end{table}
+
+\subsection{High Level Overview:}
+
+\subsubsection{Calculating Loss function}
+
+Let's say a jet is given by:
+    $$ X = \{x_i\}_{i=1}^{N} \text{\hspace{1cm}($x_i$ represents a particle)} $$
+    MPM partitions the set of particles in each jet in the dataset into masked and unmasked
+    set:
+    $$ \ma_x = \{x_i\}_{i\in \ma}, \hspace{0.5cm} \ua_x = \{x_i\}_{i\in \ua}$$
+
+    The goal of pretraining is to find out a parametric function $f_\theta: X \to
+    \mathbb{R}^{Nxd}$ (assume d-dimentional paramter set for each particle) such that the expectation of loss $\la$ can be minimized.
+
+    $$ \mathbb{E}_x \left[ \frac{1}{|\ma_m|} \sum_{i\in \ma_m} \la(x_i,
+    f_{\theta,i}(\ma_m, \ua_x)) \right] $$
+
+\subsubsection{Overview Diagram}
+
+\begin{figure}[!htb]
+  \includegraphics[width=0.9\textwidth]{overview.png}
+  \caption{Overview Diagram for Masked Particle Modelling}
+  \label{overview}
+\end{figure}
+
+The figure \ref{overview} illustrates the proposed model and training scheme for
+MPM. In this model representation, a jet is represented as a set of particles, where each particle is described by a list of features. The input set undergoes a masking process, where some particles are replaced by learnable vectors. The modified set is then processed by a transformer encoder, referred to as the MPM Backbone in this framework.
+
+The training objective is to predict the discrete token identity of the masked particles. These token identities are defined by the encoder of a pre-trained VQ-VAE. The VQ-VAE Encoder discretizes the input features into discrete codebook indices, which serve as the ground truth for the training process. The cross-entropy loss is used to evaluate the model's performance by comparing the predicted and actual token identities.
+
+To ensure permutation invariance in the backbone, positional embeddings are not
+applied within the MPM Backbone itself. Instead, they are utilized only in the
+Masked Prediction Head, depicted in the figure (box A), to break degeneracies
+that can arise when the masked tokens (e.g., $m_1$ and $m_2$) have identical values. This strategy allows the model to preserve the symmetry of unordered sets while still leveraging positional information during token prediction.
+
+The complete training pipeline thus integrates masking, transformation via the backbone, and prediction via the masked head, forming an end-to-end framework to develop a self-supervised foundation model for jet analysis.
 
 % ------------------------------------------------------
 \end{spacing}
-\end{document}
 
-\pagebreak
-\section{Foundation Models}
+\subsection{Future Direction and MPMv2}
 
-\pagebreak
-\section{Masked Particle Modelling}
+Currently a \href{https://arxiv.org/pdf/2409.12589}{new version of MPM} paper is up for proposal. This uses a more
+powerful decoder and tries to use conditional generative models without the
+tokenization.
 
+This paper presents several additional key contributions.
 
-% ------------------------------------------------------
-\end{spacing}
+(1) An improved MPM training paradigm, referred to as MPMv2, is proposed by enhancing the model architecture and addressing existing inefficiencies. Additionally, the particle attributes are expanded to provide a more detailed representation.
+
+(2) A comprehensive study is conducted on alternative reconstruction tasks for MPMv2 pre-training, replacing the computationally expensive VQ-VAE-derived targets.
+
+(3) A new test bed is introduced for pre-trained models, encompassing a broader range of downstream tasks commonly encountered in jet physics
+
+\subsection{Efforts in Running and Auditing the Model}
+
+I was originally supposed to run this model and try to replicate the results
+found in this paper. But after setting the model up in the ADA, I have faced
+various issues with particularly with modules and libraries not loading and getting stuck in
+loops. I have reached out for help but not was unable to locate through and
+single out what the issue could be. I definitely plan to work on it and figure
+it out so that we have some findings to show and compare in future.
+
+\section{Conclusion and Outlook}
+
+In this report, I have discussed the basic components of an event-generation pipeline. To make this report brief, I have take the
+example of a proton-proton collision production to discuss the various aspects
+and application of these softwares. I have glossed
+over some of details, for example the various uses of ROOT Analyser and myriad
+of subtools within it.
+
+In terms of looking through various foundation models, they might seem promising at
+first but I am afraid they require huge amount of resources to train and test
+compared to any other approach known to date. It will definitely be a struggle
+navigating through the subject with the limited resources we have in our
+college.
+
 \end{document}
